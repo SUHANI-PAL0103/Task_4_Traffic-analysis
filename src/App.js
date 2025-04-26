@@ -1,28 +1,45 @@
-import React from 'react';
-import './App.css';
-import AccidentMap from './AccidentMap';
-import AccidentDashboard from './AccidentDashboard';
+import React, { useState, useEffect } from "react";
+import AccidentDashboard from "./AccidentDashboard";
+import AccidentMap from "./AccidentMap";
+import Header from "./Header";
 
-const dummyData = [
-  { location: [40.7128, -74.006], roadCondition: "Wet", weather: "Rain", time: "08:00" },
-  { location: [40.7138, -74.005], roadCondition: "Dry", weather: "Clear", time: "17:30" },
-  // Add more dummy data as needed
-];
+const App = () => {
+  const [accidentData, setAccidentData] = useState([]);
 
-function App() {
+  useEffect(() => {
+   
+    const interval = setInterval(() => {
+      const newAccident = {
+        location: [
+          40.7128 + (Math.random() - 0.5) * 0.2, 
+          -74.006 + (Math.random() - 0.5) * 0.2
+        ],
+        roadCondition: ["Wet", "Dry", "Icy"][Math.floor(Math.random() * 3)],
+        weather: ["Clear", "Rain", "Fog"][Math.floor(Math.random() * 3)],
+        time: `${Math.floor(Math.random() * 24)}:00`
+      };
+      
+      setAccidentData(prevData => [...prevData, newAccident]);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="App">
-      <nav>
-        <h1>TASK 5</h1>
-        <h3>Traffic Management System</h3>
-      </nav>
-
-      <main>
-        <AccidentMap data={dummyData} />
-        <AccidentDashboard data={dummyData} />
-      </main>
+    <div style={{ backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
+      <Header />
+      <div style={{ padding: "2rem", maxWidth: "1200px", margin: "auto" }}>
+        {accidentData.length === 0 ? (
+          <p style={{ textAlign: "center", fontSize: "1.2rem", color: "#555" }}>⏳ Loading accident data...</p>
+        ) : (
+          <>
+            <AccidentMap data={accidentData} />
+            <AccidentDashboard data={accidentData} />
+          </>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default App;

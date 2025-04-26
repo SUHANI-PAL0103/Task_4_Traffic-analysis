@@ -1,24 +1,18 @@
-/* Reset default styles */
+
 body, h1, h2, h3, ul {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Base styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #eef1f5;
 }
-
-/* Main App container */
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
-/* Navigation bar */
 nav {
   background-color: #1e293b;
   color: white;
@@ -29,7 +23,6 @@ nav {
   flex-wrap: wrap;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 nav h1, nav h3 {
   margin: 0;
   padding: 0.3rem 0.7rem;
@@ -37,20 +30,15 @@ nav h1, nav h3 {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
-/* Main content area */
 main {
   flex-grow: 1;
   padding: 2rem;
   background-color: #f8fafc;
 }
-
-/* Optional: style individual boxes */
 h1, h3 {
   font-weight: 600;
   font-size: 1.5rem;
 }
-
 @media (max-width: 600px) {
   nav {
     flex-direction: column;
